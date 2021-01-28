@@ -20,7 +20,7 @@ const MovieList = (props) => {
         // .catch(error => console.log(error))
 
         setLoading(true)
-        axios.get('http://react-couse-actosoft-api.actosoft.com.mx/movies')
+        axios.get('https://react-couse-actosoft-api.actosoft.com.mx/movies')
             .then(res => {
                 const { data } = res.data;
                 console.log(data) ;
