@@ -1,7 +1,7 @@
 import CharacterCard from '../CharacterCard'
 import {useHistory} from 'react-router-dom'
 
-const MovieDetailUI = ({movie}) => {
+const MovieDetailUI = ({movie, handleDeleteMovie, handleDeleteCharacter}) => {
     const history = useHistory()
     const hasCharacters = characters => {
        //Solucion 1 return characters && characters.length > 0
@@ -9,9 +9,19 @@ const MovieDetailUI = ({movie}) => {
        return characters.length > 0; 
     }
     
+    const handleGoToMovieList = () => {
+        history.push('/movies')
+    }
+
     const handleGoEditMovie = () => {
         history.push(`/movies/${movie._id}/edit`)
     }
+
+    const handleGoToAddCharacters = () => {
+        history.push(`/movies/${movie._id}/characters/add`)
+    }
+
+
 
     return (
         <>
@@ -26,14 +36,20 @@ const MovieDetailUI = ({movie}) => {
             movie.characters.map(character => 
             <CharacterCard 
                 key = {character._id}
+                movieId = {movie._id}
                 character = {character}
+                handleDeleteCharacter = {handleDeleteCharacter}
             />)
             
     : <p>No hay personajes registrados</p>
     }
         
     <button onClick={handleGoEditMovie}> Editar Película </button>
-
+    <button onClick={handleDeleteMovie}> Eliminar Película </button>
+    <button onClick={handleGoToAddCharacters}> Agregar personajes </button>
+    <button onClick={handleGoToMovieList}> Volver </button>
+    
+    
         </>
     )
 }

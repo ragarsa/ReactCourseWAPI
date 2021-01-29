@@ -34,6 +34,10 @@ const MovieForm = (props) => {
         }
     }, [movieId])
 
+    const handleGoBack = () => {
+        history.goBack()
+    }
+
     const handleChangeMovieData = (event) => {
         setMovieData({
             ...movieData,
@@ -47,17 +51,19 @@ const MovieForm = (props) => {
 
         if (isUpdating) {
             request = axios.put(
-                (`https://react-couse-actosoft-api.actosoft.com.mx/movies/${movieId}`, movieData)
+                `https://react-couse-actosoft-api.actosoft.com.mx/movies/${movieId}`,
+                 movieData
             )
         } else {
             request = axios.post(
-                (`https://react-couse-actosoft-api.actosoft.com.mx/movies/${movieId}`, movieData)
+                'https://react-couse-actosoft-api.actosoft.com.mx/movies/', 
+                movieData
             )
         }
 
-            request.then(response => {
+        request.then(response => {
             console.log(response)
-            const { _id } = response.data.data
+            const { _id } = response.data.data.movie
             alert(`Película ${isUpdating ? 'Agregada' : 'Actualizada'}`)
             setTimeout(() => history.push(`/movies/${_id}`), 4000)
         })
@@ -104,6 +110,8 @@ return (
         <button onClick={handleAddMovie}>
             {isUpdating ? 'Actualizar' : 'Agregar'}
         </button>
+
+        <button onClick={handleGoBack}> Volver </button>
     </>
 )
 }
