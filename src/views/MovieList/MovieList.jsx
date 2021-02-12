@@ -36,6 +36,9 @@ const MovieList = (props) => {
 
     return (
         <div className='movieList-container'>
+            <header>
+                <img src="https://talent-network.org/comunidades/wp-content/uploads/2019/06/TN-comunidades-Actosoft.png" alt="Actosoft-Logo" />
+            </header>
             <h1> Estamos de regreso  </h1>
             {!loading ? movies.map(movie => 
                 <MovieCard
@@ -44,6 +47,8 @@ const MovieList = (props) => {
                     movie = {movie}
                 />
             ):<p> Cargando datos </p> } 
+
+            <button > testito </button>
         </div>
     )
 }
